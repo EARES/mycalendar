@@ -1,14 +1,49 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      <div class="col-md-4" text-center>
+        <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'tr' }}</h3>
+      </div>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-row>
+    <ion-col col-12 col-md-3>
+      <ion-row>
+        <ion-col col-3>
+          <button ion-button icon-only full clear mwlCalendarPreviousView [view]="view" [(viewDate)] = "viewDate">
+            <ion-icon name="ios-arrow-back"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-6 text-center>
+          <button ion-button clear full mwlCalendarToday [(viewDate)]= "viewDate">Today</button>
+        </ion-col>
+        <ion-col col-3>
+            <button ion-button icon-only full clear mwlCalendarNextView [view]="view" [(viewDate)] = "viewDate">
+                <ion-icon name="ios-arrow-forward"></ion-icon>
+              </button>
+        </ion-col>
+
+      </ion-row>
+    </ion-col>
+  </ion-row>
+ 
+  <iq-calendar-week-hours-view
+   [viewDate]="viewDate"
+   [events]="events"
+   [hourSegments]="2"
+   [dayStartHour]="8"
+   [dayEndHour]="20"
+   [refresh]="refresh"
+   [locale]="local"
+   [weekStartsOn]="1"
+   (eventClicked)="handleEvent($event.event)"
+   (hourSegmentClicked)="hourSegmentClicked($event)"
+   (eventTimesChanged)="eventTimesChanged($event)"
+   >
+
+  </iq-calendar-week-hours-view>
 </ion-content>
+
